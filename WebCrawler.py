@@ -4,8 +4,10 @@
 # @File: WebCrawler.py
 # @Software: PyCharm
 import re
+import sqlite3
 import urllib.error
 import urllib.request
+
 import xlwt
 from bs4 import BeautifulSoup
 
@@ -23,6 +25,47 @@ findJudge = re.compile(r'<span>(\d*)人评价</span>')
 findInq = re.compile(r'<span class="inq">(.*)</span>')
 # 影片相关内容
 findBd = re.compile(r'<p class="">(.*?)</p>', re.S)
+
+
+def init_db(dbpath):
+    sql = '''create table movie250
+        (
+        id integer primary key autoincrement,
+        info_link text,
+        pic_link text,
+        cname varchar,
+        oname varchar,
+        score numeric,
+        rated numeric,
+        introduction text,
+        info text
+        )'''
+    conn = sqlite3.connect(dbpath)
+    cursor = conn.cursor()
+    cursor.execute(sql)
+    conn.commit()
+    conn.close()
+
+
+def saveData2DB(datalist, dbpath):
+    try:
+        init_db(dbpath)
+    except sqlite3.OperationalError as e:
+        print("数据库已存在")
+    conn = sqlite3.connect(dbpath)
+    cur = conn.cursor()
+    for data in datalist:
+        for index in range(len(data)):
+            # 数字类型不需要加引号
+            if index == 4 or index == 5:
+                continue
+            data[index] = '"' + data[index] + '"'
+        sql = '''insert into movie250(info_link, pic_link, cname, oname, score, rated, introduction, info)
+            values(%s)''' % ",".join(data)
+        cur.execute(sql)
+        conn.commit()
+    cur.close()
+    conn.close()
 
 
 def saveData(datalist, savepath):
@@ -60,11 +103,11 @@ def getData(baseurl):
             if len(titles) == 2:
                 ctitle = titles[0]  # 添加中文名
                 data.append(ctitle)
-                otitle = titles[1].replace("/", "")  # 去掉无关的符号
+                otitle = titles[1].replace("/", "").replace(u'\xa0', '')  # 去掉无关的符号
                 data.append(otitle)  # 添加外国名
             else:
                 data.append(titles[0])
-                data.append(" ")  # 外国名字留空
+                data.append("")  # 外国名字留空
             rating = re.findall(findRating, item)[0]
             data.append(rating)  # 添加评分
             judgeNum = re.findall(findJudge, item)[0]
@@ -78,7 +121,7 @@ def getData(baseurl):
             bd = re.findall(findBd, item)[0]
             bd = re.sub("<br(\s+)?/>(\s+)?", " ", bd)  # 去掉<br/>
             bd = re.sub('/', ' ', bd)  # 替换/
-            data.append(bd.strip())  # 去掉前后的空格
+            data.append(bd.replace(u'\xa0', '').strip())  # 去掉空格
             datalist.append(data)  # 把处理好的一部电影信息放入datalist
     return datalist
 
@@ -106,10 +149,12 @@ def askURL(url):
 def main():
     baseurl = "https://movie.douban.com/top250?start="
     savepath = "豆瓣电影Top250.xls"
+    dbpath = "movieTop250.db"
     # 1.爬取网页
     datalist = getData(baseurl)
     # 2.保存数据
     saveData(datalist, savepath)
+    saveData2DB(datalist, dbpath)
     print("爬取完毕")
 
 
