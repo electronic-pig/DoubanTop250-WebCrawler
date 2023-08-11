@@ -1,2 +1,2 @@
 # DoubanTop250-WebCrawler
-豆瓣Top250电影列表网络爬虫
+豆瓣Top250电影列表网络爬虫+数据可视化Web应用
