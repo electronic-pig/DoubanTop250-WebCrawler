@@ -33,3 +33,14 @@ jobs:
           docker stop douban-container || true
           docker rm douban-container || true
           docker run -d --name douban-container -p 5000:5000 ${{ secrets.DOCKERHUB_USERNAME }}/douban-webapp:latest
+
+    - name: Clean up old Docker images and containers
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USER }}
+        password: ${{ secrets.PASSWORD }}
+        port: 22
+        script: |
+          docker image prune -f
+          docker container prune -f
