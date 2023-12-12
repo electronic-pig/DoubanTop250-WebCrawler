@@ -1,0 +1,35 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Login to Docker Hub
+      run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+
+    - name: Build and Push Docker Image
+      run: |
+        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/douban-webapp:latest .
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/douban-webapp:latest
+
+    - name: SSH and Deploy
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USER }}
+        password: ${{ secrets.PASSWORD }}
+        port: 22
+        script: |
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/douban-webapp:latest
+          docker stop douban-container || true
+          docker rm douban-container || true
+          docker run -d --name douban-container -p 5000:5000 ${{ secrets.DOCKERHUB_USERNAME }}/douban-webapp:latest
