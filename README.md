@@ -39,7 +39,9 @@ docker run -d --name douban-container -p 5000:5000 electronicpig/douban-webapp:l
 ## 运行效果
 > 主页面
 
-![网页捕获_30-9-2023_14721_20 18 120 71](https://github.com/electronic-pig/DoubanTop250-WebCrawler/assets/103497254/11a73b18-299b-4fb4-8b6b-e253b23f4278)
+![image](https://github.com/electronic-pig/DoubanTop250-WebCrawler/assets/103497254/655a439e-1f02-4bef-a8a0-63cb550e26f3)
+
 > 电影列表页面
 
-![屏幕截图 2023-09-30 152110](https://github.com/electronic-pig/DoubanTop250-WebCrawler/assets/103497254/d3415200-74a5-4454-9f11-bbb8a5596f79)
+![image](https://github.com/electronic-pig/DoubanTop250-WebCrawler/assets/103497254/fef08b8c-1d85-4f83-ae16-eac79272b5b4)
+
