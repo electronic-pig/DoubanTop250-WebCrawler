@@ -45,18 +45,18 @@ def paginate_data(data, page, per_page):
 
 @app.route('/score')
 def score():
-    score = []  # 评分
+    scores = []  # 评分
     count = []  # 每个评分的电影数量
     con = sqlite3.connect('movieTop250.db')
     cur = con.cursor()
     sql = 'select score,count(score) from movie250 group by score'
     data = cur.execute(sql)
     for item in data:
-        score.append(str(item[0]) + '分')
+        scores.append(str(item[0]) + '分')
         count.append(item[1])
     cur.close()
     con.close()
-    return render_template('score.html', score=score, count=count)
+    return render_template('score.html', scores=scores, count=count)
 
 
 @app.route('/team')

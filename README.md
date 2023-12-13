@@ -26,14 +26,15 @@
 ```
 ## 项目运行
 
-
-### 安装项目依赖
 ```
 pip install -r requirements.txt
-```
-### 启动web项目
-```
 python app.py
+```
+
+## Docker部署
+```
+docker pull electronicpig/douban-webapp:latest
+docker run -d --name douban-container -p 5000:5000 electronicpig/douban-webapp:latest
 ```
 ## 运行效果
 > 主页面

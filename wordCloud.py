@@ -1,9 +1,3 @@
-# coding=utf-8
-# @Time: 2023/8/11 15:29
-# @Author: liyang
-# @File: wordCloud.py
-# @Software: PyCharm
-
 import jieba
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud

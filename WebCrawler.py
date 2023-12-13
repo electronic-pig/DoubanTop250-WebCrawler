@@ -1,8 +1,3 @@
-# coding=utf-8
-# @Time: 2023/8/9 12:15
-# @Author: liyang
-# @File: WebCrawler.py
-# @Software: PyCharm
 import re
 import sqlite3
 import urllib.error
@@ -51,18 +46,18 @@ def saveData2DB(datalist, dbpath):
     try:
         init_db(dbpath)
     except sqlite3.OperationalError as e:
-        print("数据库已存在")
+        print(e)
     conn = sqlite3.connect(dbpath)
     cur = conn.cursor()
     for data in datalist:
-        for index in range(len(data)):
-            # 数字类型不需要加引号
-            if index == 4 or index == 5:
-                continue
-            data[index] = '"' + data[index] + '"'
-        sql = '''insert into movie250(info_link, pic_link, cname, oname, score, rated, introduction, info)
-            values(%s)''' % ",".join(data)
-        cur.execute(sql)
+        # for index in range(len(data)):
+        #     # 数字类型不需要加引号
+        #     if index == 4 or index == 5:
+        #         continue
+        #     data[index] = '"' + data[index] + '"'
+        sql = '''insert into movie250(info_link, pic_link, cname, oname, score, rated, introduction, info) values(?, ?, ?, ?, ?, ?, ?, ?)'''
+        values = (data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7])
+        cur.execute(sql, values)
         conn.commit()
     cur.close()
     conn.close()
@@ -155,7 +150,6 @@ def main():
     # 2.保存数据
     saveData(datalist, savepath)
     saveData2DB(datalist, dbpath)
-    print("爬取完毕")
 
 
 if __name__ == "__main__":

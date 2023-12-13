@@ -38,7 +38,7 @@
   <div class="container">
 
     <div class="logo float-left">
-      <h1 class="text-light"><a href="index"><span>Douban</span></a></h1>
+      <h1 class="text-light"><a href="/index"><span>Douban</span></a></h1>
     </div>
 
     <nav class="nav-menu float-right d-none d-lg-block">
@@ -92,20 +92,20 @@
 <!-- Template Main JS File -->
 <script src="../static/assets/js/main.js"></script>
 <script type="text/javascript">
-    var dom = document.getElementById('main');
-    var myChart = echarts.init(dom, null, {
+    let dom = document.getElementById('main');
+    let myChart = echarts.init(dom, null, {
         renderer: 'canvas',
         useDirtyRect: false
     });
-    var app = {};
+    let app = {};
 
-    var option;
+    let option;
 
     option = {
         tooltip: {},
         xAxis: {
             type: 'category',
-            data: {{ score|tojson }}
+            data: {{ scores|tojson }}
         },
         yAxis: {
             type: 'value'
