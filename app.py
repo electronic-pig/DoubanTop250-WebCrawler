@@ -1,6 +1,7 @@
 import sqlite3
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+from flask_paginate import Pagination
 
 app = Flask(__name__)
 
@@ -16,19 +17,31 @@ def home():
     return index()
 
 
-@app.route('/movie')
+@app.route('/movie', methods=['GET'])
 def movie():
-    datalist = []
+    page = request.args.get('page', 1, type=int)
+    per_page = 10
+
     con = sqlite3.connect('movieTop250.db')
     cur = con.cursor()
     sql = 'select * from movie250'
-    data = cur.execute(sql)
-    for item in data:
-        datalist.append(item)
+    data = cur.execute(sql).fetchall()  # 获取所有数据
     cur.close()
     con.close()
-    return render_template('movie.html', movies=datalist)
 
+    paginated_data = paginate_data(data, page, per_page)
+
+    pagination = Pagination(page=page, total=len(data), per_page=per_page)
+    print(pagination.total)
+    print(pagination.per_page)
+    print(pagination.pages)
+    return render_template('movie.html', movies=paginated_data, pagination=pagination)
+
+def paginate_data(data, page, per_page):
+    start = (page - 1) * per_page
+    end = start + per_page
+    paginated_data = data[start:end]
+    return paginated_data
 
 @app.route('/score')
 def score():

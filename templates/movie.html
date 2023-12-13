@@ -37,9 +37,7 @@
   <div class="container">
 
     <div class="logo float-left">
-      <h1 class="text-light"><a href="temp.html"><span>Douban</span></a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="temp.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      <h1 class="text-light"><a href="index"><span>Douban</span></a></h1>
     </div>
 
     <nav class="nav-menu float-right d-none d-lg-block">
@@ -89,6 +87,28 @@
         </tr>
       {% endfor %}
     </table>
+
+    <!-- 分页链接 -->
+    <div class="pagination-container">
+      <div class="pagination">
+        {% if pagination.has_prev %}
+          <a class="page-link" href="{{ url_for('movie', page=pagination.page - 1) }}">上一页</a>
+        {% endif %}
+
+        {% for page_num in pagination.pages %}
+          {% if page_num %}
+            <li class="page-item {% if page_num==pagination.page %}active{% endif %}"><a class="page-link" href="{{ url_for('movie', page=page_num) }}">{{ page_num }}</a></li>
+          {% else %}
+            <a class="page-link" href="#">&hellip;</a>
+          {% endif %}
+        {% endfor %}
+
+        {% if pagination.has_next %}
+          <a class="page-link" href="{{ url_for('movie', page=pagination.page + 1) }}">下一页</a>
+        {% endif %}
+      </div>
+    </div>
+
   </div>
 </section>
 
