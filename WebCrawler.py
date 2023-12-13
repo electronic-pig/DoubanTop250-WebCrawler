@@ -50,11 +50,6 @@ def saveData2DB(datalist, dbpath):
     conn = sqlite3.connect(dbpath)
     cur = conn.cursor()
     for data in datalist:
-        # for index in range(len(data)):
-        #     # 数字类型不需要加引号
-        #     if index == 4 or index == 5:
-        #         continue
-        #     data[index] = '"' + data[index] + '"'
         sql = '''insert into movie250(info_link, pic_link, cname, oname, score, rated, introduction, info) values(?, ?, ?, ?, ?, ?, ?, ?)'''
         values = (data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7])
         cur.execute(sql, values)
