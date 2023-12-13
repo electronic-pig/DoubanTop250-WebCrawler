@@ -1,7 +1,8 @@
+numpy
+matplotlib
 bs4
 flask
+flask_paginate
 jieba
-matplotlib
-numpy
 wordcloud
 xlwt
