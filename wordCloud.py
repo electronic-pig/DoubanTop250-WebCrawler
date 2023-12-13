@@ -24,7 +24,8 @@ con.close()
 
 # 2.分词
 cut = jieba.cut(text)
-string = ' '.join(cut)
+words = [word for word in cut if len(word) > 1]  # 仅保留长度大于1的词语
+string = ' '.join(words)
 print(len(string))
 
 # 3.创建遮罩
@@ -45,4 +46,3 @@ plt.axis('off')  # 是否显示坐标轴
 # plt.show()  # 显示生成的词云图片
 # 5.输出词云图片到文件
 plt.savefig(r'.\static\assets\img\wordCloud.jpg', dpi=200)
-
