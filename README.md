@@ -11,14 +11,18 @@
 │  requirements.txt        //项目依赖文件
 │  WebCrawler.py           //网页爬虫文件
 │  wordCloud.py            //词云生成文件
-├─static                   //静态资源文件
-│  └─assets
+├─static                   
+│  └─assets                //静态资源文件
 ├─templates                //项目页面文件
 │      index.html
 │      movie.html
 │      score.html
 │      team.html
 │      word.html
+├─github
+│  └─workflows
+|        main.yml          //github Actions 自动化部署配置文件
+        
 ```
 ## 项目运行
 
