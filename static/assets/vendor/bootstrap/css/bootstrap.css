@@ -5005,14 +5005,14 @@ input[type="button"].btn-block {
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #007bff;
+  color: #5c768d;
   background-color: #fff;
   border: 1px solid #dee2e6;
 }
 
 .page-link:hover {
   z-index: 2;
-  color: #0056b3;
+  color: #5c768d;
   text-decoration: none;
   background-color: #e9ecef;
   border-color: #dee2e6;
@@ -5021,7 +5021,7 @@ input[type="button"].btn-block {
 .page-link:focus {
   z-index: 3;
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  box-shadow: 0 0 0 0.2rem #5c768d;
 }
 
 .page-item:first-child .page-link {
@@ -5038,8 +5038,8 @@ input[type="button"].btn-block {
 .page-item.active .page-link {
   z-index: 3;
   color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color: #5c768d;
+  border-color: #5c768d;
 }
 
 .page-item.disabled .page-link {
