@@ -1,5 +1,6 @@
 # DoubanTop250-WebCrawler
 ![GitHub](https://img.shields.io/github/license/electronic-pig/DoubanTop250-WebCrawler)
+![GitHub Repo stars](https://img.shields.io/github/stars/electronic-pig/DoubanTop250-WebCrawler)
 
 豆瓣Top250电影列表网络爬虫+数据可视化Web应用
 
