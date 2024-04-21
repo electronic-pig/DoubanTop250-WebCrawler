@@ -6,3 +6,4 @@ flask_paginate
 jieba
 wordcloud
 xlwt
+gunicorn

@@ -10,8 +10,8 @@ COPY . /app
 # 安装项目依赖
 RUN pip install -r requirements.txt
 
-# 暴露Flask应用程序所使用的端口
-EXPOSE 5000
+# 暴露所使用的端口
+EXPOSE 8000
 
 # 启动Flask应用程序
-CMD ["python", "app.py"]
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:8000", "app:app"]
