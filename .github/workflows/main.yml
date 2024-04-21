@@ -33,6 +33,6 @@ jobs:
           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/douban-webapp:latest
           docker stop douban-container || true
           docker rm douban-container || true
-          docker run -d --name douban-container -p 5000:5000 ${{ secrets.DOCKERHUB_USERNAME }}/douban-webapp:latest
+          docker run -d --name douban-webapp -p 8000:8000 ${{ secrets.DOCKERHUB_USERNAME }}/douban-webapp:latest
           docker image prune -f
           docker container prune -f
