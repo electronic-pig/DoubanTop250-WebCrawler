@@ -1,5 +1,7 @@
 # DoubanTop250-WebCrawler
 ![GitHub](https://img.shields.io/github/license/electronic-pig/DoubanTop250-WebCrawler)
+[![build status](https://github.com/electronic-pig/DoubanTop250-WebCrawler/actions/workflows/main.yml/badge.svg)](https://github.com/electronic-pig/DoubanTop250-WebCrawler/actions)
+![python version](https://img.shields.io/badge/python-3.7+-orange.svg)
 ![GitHub Repo stars](https://img.shields.io/github/stars/electronic-pig/DoubanTop250-WebCrawler)
 
 豆瓣Top250电影列表网络爬虫+数据可视化Web应用
@@ -25,8 +27,8 @@
 |        main.yml          //github Actions 自动化部署配置文件
         
 ```
-## 项目运行
 
+## 项目运行
 ```
 pip install -r requirements.txt
 python app.py
@@ -35,8 +37,9 @@ python app.py
 ## Docker部署
 ```
 docker pull electronicpig/douban-webapp:latest
-docker run -d --name douban-container -p 5000:5000 electronicpig/douban-webapp:latest
+docker run -d --name douban-webapp -p 8000:8000 electronicpig/douban-webapp:latest
 ```
+
 ## 运行效果
 > 主页面
 

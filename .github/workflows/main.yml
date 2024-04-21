@@ -1,5 +1,5 @@
 #secrets密钥需要自行配置
-name: Deploy to Server
+name: Deploy
 
 on:
   push:
