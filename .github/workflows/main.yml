@@ -12,7 +12,7 @@ jobs:
 
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Login to Docker Hub
       run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
@@ -23,7 +23,7 @@ jobs:
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/douban-webapp:latest
 
     - name: SSH and Deploy
-      uses: appleboy/ssh-action@master
+      uses: appleboy/ssh-action@v1.0.3
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
@@ -31,8 +31,8 @@ jobs:
         port: 22
         script: |
           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/douban-webapp:latest
-          docker stop douban-container || true
-          docker rm douban-container || true
+          docker stop douban-webapp || true
+          docker rm douban-webapp || true
           docker run -d --name douban-webapp -p 8000:8000 ${{ secrets.DOCKERHUB_USERNAME }}/douban-webapp:latest
           docker image prune -f
           docker container prune -f
