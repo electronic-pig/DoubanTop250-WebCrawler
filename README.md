@@ -4,9 +4,10 @@
 ![python version](https://img.shields.io/badge/python-3.7+-orange.svg)
 ![GitHub Repo stars](https://img.shields.io/github/stars/electronic-pig/DoubanTop250-WebCrawler)
 
+## ✨ 项目简介
 豆瓣Top250电影列表网络爬虫+数据可视化Web应用
 
-## 📁 主要文件结构
+## 📁 项目结构
 ```
 │  app.py                  //flask应用入口
 │  dockerfile              //docker部署文件
@@ -49,3 +50,5 @@ docker run -d --name douban-webapp -p 8000:8000 electronicpig/douban-webapp:late
 
 ![image](https://github.com/electronic-pig/DoubanTop250-WebCrawler/assets/103497254/fef08b8c-1d85-4f83-ae16-eac79272b5b4)
 
+## ✍ 写在最后
+项目制作不易，如果它对你有帮助的话，请务必给作者点一个免费的⭐，万分感谢!🙏🙏🙏
